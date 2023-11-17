@@ -28,6 +28,15 @@ async function run() {
 }
 run().catch(console.dir);
 
+const addJobsCollections = client.db('AllCategoryOfJobs').collection('clientsAddedJobs');
+
+
+// post the data of add jobs
+app.post('/addJobs', async(req, res) => {
+  const cosmetic = req.body;
+  const result = await addJobsCollections.insertOne(cosmetic);
+  res.send(result)
+})
 app.get('/', (req, res) => {
    res.send("welcome to my server side")
 })
