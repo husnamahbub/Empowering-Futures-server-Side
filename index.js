@@ -29,7 +29,13 @@ async function run() {
 run().catch(console.dir);
 
 const addJobsCollections = client.db('AllCategoryOfJobs').collection('clientsAddedJobs');
+const categoryJobsCollections = client.db('AllCategoryOfJobs').collection('category-job-tabs');
 
+app.get('/category', async(req, res) => {
+  const cursor = categoryJobsCollections.find()
+  const result = await cursor.toArray();
+  res.send(result)
+})
 
 // post the data of add jobs
 app.post('/addJobs', async(req, res) => {
@@ -43,4 +49,4 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
     console.log(`Welcome  to our server side ${port}`);
-})
+}) 
